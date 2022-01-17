@@ -16,13 +16,11 @@
           Not found
         </h1>
         <div class="grid grid-cols-10 gap-1">
-          <div
-            class=""
-            v-for="card of this.$store.state.cards"
-            :key="card.title"
-          >
-            <img class="h-auto" v-bind:src="card.card_images[0].image_url" />
+        <template v-for="card of this.$store.state.cards">
+          <div class="" v-for="image of card.card_images" >
+            <img class="h-auto" v-bind:src="image.image_url"/>
           </div>
+        </template>
         </div>
       </div>
     </div>
@@ -39,6 +37,10 @@ export default {
   methods: {
     async search() {
       await this.$store.dispatch("searchDecks", this.input);
+      // await fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?format=ocg goat`)
+      // .then((result) => result.json()).then(rs=>{
+      //   console.log(rs)
+      // })
     },
   },
 };

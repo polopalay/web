@@ -13,13 +13,14 @@ const store = () => {
     },
     actions: {
       searchDecks(context, text) {
-      const cards = this.$fire.database.ref('cards').orderByChild('archetype').equalTo(text.toLowerCase());
+      // const cards = this.$fire.database.ref('cards').orderByChild('name').equalTo(text.toLowerCase());
+      const cards = this.$fire.database.ref('cards');
       cards.once('value',(snapshot)=>{
         let data= snapshot.val();
         context.commit("searchDecks", data?data:[]);
       })
         //  this.$axios.$get(
-        //   `https://db.ygoprodeck.com/api/v7/cardinfo.php`
+        //   `https://db.ygoprodeck.com/api/v7/cardinfo.php?format=ocg goat`
         // ).then((rs) => {
         //   rs.data.forEach(element => {
         //     if(element.archetype) {
